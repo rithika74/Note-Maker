@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Edit from './Edit'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Notes = () => {
 
@@ -11,6 +10,7 @@ const Notes = () => {
     })
     const [submitted, setSubmitted] = useState('')
     const [notes, setNotes] = useState([])
+    const navigate = useNavigate()
 
     const handleChange = (event) => {
         setData({ ...data, [event.target.name]: event.target.value });
@@ -25,6 +25,7 @@ const Notes = () => {
             if (response.data) {
                 alert("Notes added successfully")
             }
+            window.location.reload();
         } catch (error) {
             console.error("Error adding notes", error)
         }
@@ -53,6 +54,10 @@ const Notes = () => {
             console.log('Error deleting notes');
         }
     };
+
+    const handleClick = () => {
+        navigate(  `/edit`)
+    }
 
     return (
         <>
@@ -83,7 +88,7 @@ const Notes = () => {
                                                     <p>{item.description}</p>
                                                     <div className='btn'>
                                                         <Link to={`/edit/${item._id}`}>
-                                                            <button className='btn1'>Edit</button>
+                                                        <button className='btn1'>Edit</button>
                                                         </Link>
                                                         <button className='btn2' onClick={() => handleDelete(item._id)}>Delete</button>
                                                     </div>

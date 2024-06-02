@@ -70,6 +70,19 @@ app.put('/update/:id', async (req, res) => {
     }
 });
 
+app.get('/viewone/:id', async (req, res) => {
+    try {
+        let id = req.params.id;
+        console.log(id);
+        let response = await Notes.findById(id)
+        console.log(response);
+        res.json(response);
+    } catch (error) {
+        console.error('Error finding note:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
+
 app.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;

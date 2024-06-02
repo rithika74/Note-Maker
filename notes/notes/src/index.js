@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Notes from './Components/Notes';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Edit from './Components/Edit';
+import EditNote from './Components/EditNote';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,9 +14,8 @@ root.render(
     {/* <Notes /> */}
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Notes/>}>
-          <Route path='edit' element={<Edit/>}/>
-        </Route>
+        <Route path='/' element={<Notes />} />
+        <Route path='edit/:id' element={<EditNote />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
